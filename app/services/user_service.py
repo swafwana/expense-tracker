@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models.user import User
-from app.core.security import hash_password
+from app.core.security import hash_password,verify_password, create_access_token
 
 
 def register_user(db: Session, email: str, password: str) -> User:
@@ -22,3 +22,15 @@ def register_user(db: Session, email: str, password: str) -> User:
 
     # Step 5: return the full model — filtering to UserOut happens in the router later
     return new_user
+def login_user(db: Session, email: str, password: str) -> dict:
+    user = db.query(User).filter(User.email == email).first()
+
+    if not user or not verify_password(password, user.hashed_password):
+        raise ValueError("Invalid email or password")
+
+    access_token = create_access_token({"sub": str(user.id)})
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer"
+    }
