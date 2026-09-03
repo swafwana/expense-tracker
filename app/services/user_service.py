@@ -34,3 +34,5 @@ def login_user(db: Session, email: str, password: str) -> dict:
         "access_token": access_token,
         "token_type": "bearer"
     }
+def get_user_by_id(db: Session, user_id: int):
+    return db.query(User).filter(User.id == user_id).first()
