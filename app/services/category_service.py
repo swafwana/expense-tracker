@@ -3,6 +3,7 @@ from app.models.category import Category
 from sqlalchemy.exc import IntegrityError
 
 
+
 def create_category(db: Session, name: str, user_id: int) -> Category:
     category = Category(name=name,user_id=user_id)
     db.add(category)
@@ -14,3 +15,9 @@ def create_category(db: Session, name: str, user_id: int) -> Category:
         
     db.refresh(category)
     return category
+def get_categories(db: Session,user_id: int) -> list[Category]:
+    categories = db.query(Category).filter(Category.user_id == user_id).all()
+    return  categories
+
+
+    
