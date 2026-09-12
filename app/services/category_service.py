@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from app.models.category import Category
 from app.models.budget import Budget
+from app.models.expense import Expense
 from sqlalchemy.exc import IntegrityError
 
 
@@ -49,11 +50,10 @@ def delete_category(db: Session, category_id: int, user_id: int) -> None:
     for budget in budgets:
         db.delete(budget)
 
+    expenses = db.query(Expense).filter(Expense.category_id == category_id).all()
+    for expense in expenses:
+        db.delete(expense)
+    db.flush()
+
     db.delete(category)
     db.commit()
-
-    
-
-
-
-    
