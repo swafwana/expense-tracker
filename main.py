@@ -7,11 +7,12 @@ from app.models.budget import Budget
 from app.models.expense import Expense
 
 from app.routers import auth,category,budget,expense
-
+from app.routers import summary
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+app.include_router(summary.router)
 app.include_router(auth.router)
 app.include_router(category.router)
 app.include_router(budget.router)
