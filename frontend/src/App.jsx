@@ -1,7 +1,12 @@
-import Register from "./pages/Register";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  return <Register />;
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
 export default App;
