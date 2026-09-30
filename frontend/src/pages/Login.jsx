@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
+  const { login } = useAuth();
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
@@ -24,8 +27,8 @@ function Login() {
         return;
       }
 
-      setResult(data);
-    } catch (err) {
+      login(data.access_token);
+      navigate("/dashboard");    } catch (err) {
       setError("Could not reach the server");
     }
   }
