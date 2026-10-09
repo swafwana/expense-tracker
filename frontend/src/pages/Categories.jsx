@@ -6,6 +6,8 @@ function Categories() {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [editingId, setEditingId] = useState(null);
+  const [editName, setEditName] = useState("");
 
   async function loadCategories() {
   const response = await fetch("http://localhost:8000/categories", {
@@ -61,6 +63,28 @@ function Categories() {
     setMessage("Could not reach the server");
   }
 }
+async function handleSave(id) {
+  try {
+    const response = await fetch(`http://localhost:8000/categories/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ name: editName }),
+    });
+    if (response.ok) {
+      setEditingId(null);
+      setMessage("");
+      loadCategories();
+    } else {
+      const error = await response.json();
+      setMessage(error.detail);
+    }
+  } catch {
+    setMessage("Could not reach the server");
+  }
+}
 
   return (
     <div>
@@ -77,9 +101,30 @@ function Categories() {
       <ul>
         {categories.map((category) => (
           <li key={category.id}>
-          {category.name}
-        <button onClick={() => handleDelete(category.id)}>Delete</button>
-      </li>
+  {editingId === category.id ? (
+    <>
+      <input
+        value={editName}
+        onChange={(e) => setEditName(e.target.value)}
+      />
+      <button onClick={() => handleSave(category.id)}>Save</button>
+      <button onClick={() => setEditingId(null)}>Cancel</button>
+    </>
+  ) : (
+    <>
+      {category.name}
+      <button
+        onClick={() => {
+          setEditingId(category.id);
+          setEditName(category.name);
+        }}
+      >
+        Edit
+      </button>
+      <button onClick={() => handleDelete(category.id)}>Delete</button>
+    </>
+  )}
+  </li>
        ))}
     </ul>
     </div>
