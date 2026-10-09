@@ -41,6 +41,26 @@ function Categories() {
     setMessage("Could not reach the server");
   }
   }
+  async function handleDelete(id) {
+  if (!window.confirm("Delete this category and its budgets and expenses?")) {
+    return;
+  }
+  try {
+    const response = await fetch(`http://localhost:8000/categories/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (response.ok) {
+      setMessage("");
+      loadCategories();
+    } else {
+      const error = await response.json();
+      setMessage(error.detail);
+    }
+  } catch {
+    setMessage("Could not reach the server");
+  }
+}
 
   return (
     <div>
@@ -56,9 +76,12 @@ function Categories() {
       <p>{message}</p>
       <ul>
         {categories.map((category) => (
-          <li key={category.id}>{category.name}</li>
-        ))}
-      </ul>
+          <li key={category.id}>
+          {category.name}
+        <button onClick={() => handleDelete(category.id)}>Delete</button>
+      </li>
+       ))}
+    </ul>
     </div>
   );
 }
