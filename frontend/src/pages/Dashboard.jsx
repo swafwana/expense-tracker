@@ -14,6 +14,7 @@ function Dashboard() {
     <div>
       <h1>Dashboard</h1>
       <Link to="/categories">Categories</Link><br></br>
+      <Link to="/expenses">Expenses</Link><br></br>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );
