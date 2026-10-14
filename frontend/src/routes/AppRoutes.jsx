@@ -5,6 +5,7 @@ import Dashboard from "../pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 import Categories from "../pages/Categories";
 import Expenses from "../pages/Expenses";
+import Budgets from "../pages/Budgets";
 
 
 function AppRoutes() {
@@ -13,29 +14,37 @@ function AppRoutes() {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route
-  path="/dashboard"
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  }
-/>
-<Route
-  path="/categories"
-  element={
-    <ProtectedRoute>
-      <Categories />
-    </ProtectedRoute>
-  }
-/>
-<Route
-  path="/expenses"
-  element={
-    <ProtectedRoute>
-      <Expenses />
-    </ProtectedRoute>
-  }
-/>
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/categories"
+        element={
+          <ProtectedRoute>
+            <Categories />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/expenses"
+        element={
+          <ProtectedRoute>
+            <Expenses />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/budgets"
+        element={
+          <ProtectedRoute>
+            <Budgets />
+          </ProtectedRoute>
+        }
+      />
 
     </Routes>
   );
