@@ -6,12 +6,11 @@ import {
   Edit3,
   Calendar,
   Tag,
-  DollarSign,
   AlertCircle,
   Check,
   X,
-  TrendingDown,
-  PieChart,
+  
+  
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import AppLayout from "../components/AppLayout";
