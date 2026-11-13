@@ -3,12 +3,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Home,
   Plus,
-  Wallet,
-  User,
+   Wallet,
   LogOut,
   Layers,
   CreditCard,
-  Bell,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import AddExpenseModal from "./AddExpenseModal";
@@ -118,17 +116,10 @@ export default function AppLayout({ children, onDataRefresh }) {
             </h1>
             <p className="text-xs text-slate-400">Manage your daily transactions and financial goals</p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-right hidden lg:block">
-              <p className="text-xs font-semibold text-slate-600">
-                Welcome back, {user?.name || "Friend"}
-              </p>
-              <p className="text-[11px] text-[#438883] font-medium">Personal Finance</p>
-            </div>
-            <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 relative">
-              <Bell className="w-4 h-4" />
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-amber-400" />
-            </div>
+                    <div className="text-right hidden lg:block">
+            <p className="text-xs font-semibold text-slate-600">
+              Welcome back, {user?.name || "Friend"}
+            </p>
           </div>
         </header>
 
@@ -171,7 +162,7 @@ export default function AppLayout({ children, onDataRefresh }) {
           <div className="relative -top-5">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="w-13 h-13 rounded-full mono-gradient-primary text-white flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-transform border-4 border-[#F8FAFA] cursor-pointer"
+              className="w-14 h-14 rounded-full mono-gradient-primary text-white flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-transform border-4 border-[#F8FAFA] cursor-pointer"
               aria-label="Add expense"
             >
               <Plus className="w-6 h-6 stroke-[2.5]" />
@@ -200,8 +191,8 @@ export default function AppLayout({ children, onDataRefresh }) {
                 : "text-slate-400 hover:text-slate-600"
             }`}
           >
-            <User className="w-5 h-5" />
-            <span className="text-[9px] font-semibold mt-0.5">Profile</span>
+            <Layers className="w-5 h-5" />
+            <span className="text-[9px] font-semibold mt-0.5">Categories</span>
           </Link>
         </div>
       </div>
